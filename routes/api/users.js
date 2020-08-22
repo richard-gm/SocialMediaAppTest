@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {check, validationResult } = require('express-validator/check')
 const gravatar = require('gravatar')//avatar pic
 const bcrypt = require('bcryptjs')//Encrypt psw
 const jwt = require('jsonwebtoken')
 const config = require('config')
+const {check, validationResult } = require('express-validator/check')
 // Importing user
 const User = require('../../models/User')
 
