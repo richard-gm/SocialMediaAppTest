@@ -190,11 +190,21 @@ router.put(
     };
     try {
       const profile = await Profile.findOne({ user: req.user.id });
+      if (profile.experience.length !== 0) {
+        console.log("User experience has been defined!");
+        res.json({ msg: "Experience for this user has already been defined" });
+      } else {
 
-      profile.experience.unshift(newExp);
-      await profile.save();
+        profile = await Profile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: profileFields },
+          { new: true }
+          
+        profile.experience.unshift(newExp);
+        await profile.save();
 
-      res.json(profile);
+        res.json(profile);
+      }
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
